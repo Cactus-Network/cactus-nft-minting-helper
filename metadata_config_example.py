@@ -25,7 +25,7 @@ collection_website = ""
 
 # Collection Discord- invitiation link to your Discord server
 # should be a url starting with https://discord.com/
-# Leave as is for none
+# Leave as is for nonei
 collection_discord = ""
 
 # URL of collection icon png image. 

@@ -4,9 +4,9 @@
 
 # Requirements : 
 
-# To use this script, you must have the Chia client installed from source on a Linux operating system.
+# To use this script, you must have the Cactus client installed from source on a Linux operating system.
 # It must be version 1.4 or greater.
-# You also need an NFT wallet linked to a DID wallet (instructions can be found in Chia's NFT tutorial).
+# You also need an NFT wallet linked to a DID wallet (instructions can be found in Cactus's NFT tutorial).
 # Your wallet must be running and synced before running the script.
 
 # Images must all be saved in a directory called 'images' which is a subfolder of the folder this script is running in.
@@ -31,10 +31,10 @@ api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2YjQ1ZT
 # Total number to mint with this script. Should match the number of image files and number of metadata files.
 total_num_to_mint=30
 
-# NFT Wallet Fingerprint (Found in chia client CLI)
+# NFT Wallet Fingerprint (Found in cactus client CLI)
 nft_wallet_fingerprint=1731819744
 
-# NFT Wallet ID (found in Chia client CLI)
+# NFT Wallet ID (found in Cactus client CLI)
 nft_wallet_id=8
 
 # Address loyalty rewards will go to - BE SURE TO CHANGE THIS TO YOUR ADDRESS
@@ -49,8 +49,8 @@ blockchain_minting_fee=0
 # Directory this file is in. Probably no need to change this
 localdir="./"
 
-# Directory your chia client exists in. Must be version 1.4 or greater with CLI (installed from source). 
-chia_dir='~/chia-blockchain'
+# Directory your cactus client exists in. Must be version 1.4 or greater with CLI (installed from source). 
+cactus_dir='~/cactus-blockchain'
 
 # This variable represents the number that the script will start at. If you get an error and have to restart the script, you can change this to the number you stopped at, so that it won't try to mint the same nft twice
 i=1
@@ -130,7 +130,7 @@ do
 
 	# Create command & Validate with user
 	echo "Please validate the minting details before execution:"
-	read -p "chia wallet nft mint -f $nft_wallet_fingerprint -i $nft_wallet_id -ra $royalty_wallet_address -u $image_url -nh $local_image_hash -mu $metadata_url -mh $local_metadata_hash $total_num_in_series -rp $royalty_prcntg_converted -m $blockchain_minting_fee \n Would you like to mint your NFT? Final answer (y/n)" response
+	read -p "cactus wallet nft mint -f $nft_wallet_fingerprint -i $nft_wallet_id -ra $royalty_wallet_address -u $image_url -nh $local_image_hash -mu $metadata_url -mh $local_metadata_hash $total_num_in_series -rp $royalty_prcntg_converted -m $blockchain_minting_fee \n Would you like to mint your NFT? Final answer (y/n)" response
 	   if [ $response == "y" ]
 	   then
 		echo "Proceeding to mint..."
@@ -141,11 +141,11 @@ do
 
 		   
 
-	# Start Chia and Execute minting command
-	cd ~/chia-blockchain
+	# Start Cactus and Execute minting command
+	cd ~/cactus-blockchain
 	. ./activate
-	chia wallet show
-	chia wallet nft mint -f $nft_wallet_fingerprint -i $nft_wallet_id -ra $royalty_wallet_address -u $image_url -nh $local_image_hash -mu $metadata_url -mh $local_metadata_hash -rp $royalty_prcntg_converted -m $blockchain_minting_fee
+	cactus wallet show
+	cactus wallet nft mint -f $nft_wallet_fingerprint -i $nft_wallet_id -ra $royalty_wallet_address -u $image_url -nh $local_image_hash -mu $metadata_url -mh $local_metadata_hash -rp $royalty_prcntg_converted -m $blockchain_minting_fee
 	deactivate
 	i=$((i+1))
 	cd $OLDPWD
