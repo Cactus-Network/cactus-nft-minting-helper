@@ -34,6 +34,8 @@ def main_function():
         collection['attributes'].append({'type':'discord','value':collection_discord})
     if collection_icon:
         collection['attributes'].append({'type':'icon','value':collection_icon})
+    if collection_banner:
+        collection['attributes'].append({'type':'banner','value':collection_banner})
 
 
     n_format = "CHIP-0007"
@@ -59,14 +61,15 @@ def main_function():
                 if indvdl_attributes == True:
                     for j in range(num_attributes):
                         k = j + 4
-                        attributes_list.append({"trait type":attribute_names[j],"value":csvreader[i][k]})
+                        attributes_list.append({"trait_type":attribute_names[j],"value":csvreader[i][k]})
                 jsondata['format'] = n_format
                 jsondata['name'] = name
                 jsondata['description'] = description
                 jsondata['sensitive_content'] = sensitive_content
-                jsondata['collection'] = collection
+
                 if indvdl_attributes == True:
                     jsondata['attributes'] = attributes_list
+                jsondata['collection'] = collection
 
                 with open(f"metadata/metadata{i}.json","w") as f:
                     f.write(json.dumps(jsondata, indent=4))
